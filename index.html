@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAP Controls Mastery — TIB Systems LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy:#1F3864; --navy-dark:#152747; --blue:#2E5395; --accent:#3E7CB1;
+    --green:#1E7145; --amber:#B8860B; --red:#C00000;
+    --bg:#F4F6FA; --card:#FFFFFF; --border:#E1E6EF; --text:#1B2430; --muted:#5A6472;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text);}
+  a{color:inherit;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 18px;}
+
+  /* Top nav */
+  nav.topnav{
+    position:sticky; top:0; z-index:50; background:linear-gradient(135deg,var(--navy),var(--navy-dark));
+    box-shadow:0 2px 10px rgba(0,0,0,0.15);
+  }
+  .nav-inner{max-width:1860px; margin:0 auto; padding:9px 18px; display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .brand{color:#fff; font-weight:800; font-size:1.05rem; cursor:pointer; white-space:nowrap;}
+  .brand span{color:#9FC0E8; font-weight:600; font-size:0.72rem; display:block;}
+  .nav-links{display:flex; gap:5px; flex-wrap:wrap;}
+  .nav-links a{
+    display:inline-block;
+    color:#E5C878;
+    text-decoration:none;
+    font-size:0.76rem;
+    font-weight:700;
+    letter-spacing:0.01em;
+    padding:7px 11px;
+    border-radius:7px;
+    white-space:nowrap;
+    background:linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.02));
+    border:1px solid rgba(255,255,255,0.16);
+    box-shadow:0 2px 0 rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.18);
+    transition:transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+  }
+  .nav-links a:hover{
+    background:linear-gradient(180deg, #EFC868, #C99A32);
+    color:#18233D;
+    border-color:#C99A32;
+    transform:translateY(-2px);
+    box-shadow:0 5px 0 rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.45);
+  }
+  .nav-links a.active{
+    background:linear-gradient(180deg, #D9AE4F, #B8860B);
+    color:#18233D;
+    border-color:#8A6508;
+    transform:translateY(1px);
+    box-shadow:inset 0 2px 5px rgba(0,0,0,0.4), inset 0 -1px 0 rgba(255,255,255,0.25);
+  }
+  .nav-cta{
+    background:linear-gradient(180deg, #FFFFFF, #EEF1F6); color:var(--navy); font-weight:800; font-size:0.8rem; padding:9px 16px; border-radius:8px;
+    text-decoration:none; white-space:nowrap; border:2px solid #D9AE4F;
+    box-shadow:0 3px 0 rgba(0,0,0,0.3), inset 0 1px 0 #fff;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .nav-cta:hover{background:linear-gradient(180deg, #fff, #fff); transform:translateY(-2px); box-shadow:0 5px 0 rgba(0,0,0,0.3), inset 0 1px 0 #fff;}
+  .mobile-menu-btn{display:none; background:rgba(255,255,255,0.12); border:none; color:#fff; padding:8px 12px; border-radius:7px; font-size:1rem; cursor:pointer;}
+
+  /* Page sections */
+  .page{display:none; padding:20px 0 60px;}
+  .page.active{display:block;}
+
+  /* Hero (home only) */
+  .hero{
+    background:linear-gradient(135deg,var(--navy),var(--navy-dark)); color:#fff;
+    padding:26px 20px 22px; text-align:center; margin-bottom:0;
+  }
+  .hero h1{font-size:1.7rem; margin:0 0 8px; line-height:1.22;}
+  .hero p{font-size:0.96rem; color:#C9D4E8; max-width:640px; margin:0 auto 14px; line-height:1.5;}
+  .hero-subhead{
+    font-weight:700; font-size:0.74rem; letter-spacing:0.04em; text-transform:uppercase;
+    margin:0 0 8px; color:#9FC0E8;
+  }
+  .title-tags{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:14px;}
+  .title-tag{
+    font-size:0.76rem; font-weight:600; color:#fff;
+    background:rgba(255,255,255,0.09); border:1px solid rgba(255,255,255,0.22);
+    padding:6px 12px; border-radius:7px;
+  }
+  .hero-ctas{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+  .hero-softlink{margin:16px 0 0; font-size:0.85rem; color:#9FB3D6;}
+  .hero-softlink a{color:#E5C878; text-decoration:underline; cursor:pointer;}
+  .btn-primary{
+    background:#fff; color:var(--navy); font-weight:800; padding:14px 26px; border-radius:10px;
+    text-decoration:none; font-size:0.95rem; box-shadow:0 4px 14px rgba(0,0,0,0.2);
+  }
+  .btn-primary:hover{background:#EEF2FA;}
+  .btn-outline{
+    background:transparent; color:#fff; font-weight:700; padding:14px 26px; border-radius:10px;
+    text-decoration:none; font-size:0.95rem; border:1.5px solid rgba(255,255,255,0.5);
+  }
+  .btn-outline:hover{background:rgba(255,255,255,0.1);}
+
+  h2.section-title{font-size:1.5rem; color:var(--navy); margin:0 0 6px;}
+  h3{color:var(--blue); font-size:1.1rem; margin:22px 0 8px;}
+  p{line-height:1.6; font-size:0.95rem;}
+  .lead{font-size:1.02rem; color:var(--muted); margin-bottom:22px;}
+
+  /* TOC cards on homepage */
+  .toc-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:28px 0;}
+  .toc-card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px;
+    text-decoration:none; color:var(--text); display:block; transition:all 0.15s;
+  }
+  .toc-card:hover{border-color:var(--accent); box-shadow:0 4px 14px rgba(20,30,60,0.08); transform:translateY(-2px);}
+  .toc-card.toc-card-highlight{border-color:var(--accent); background:#F0F7FF;}
+  .toc-card .toc-icon{font-size:1.4rem; margin-bottom:8px;}
+  .toc-card h4{margin:0 0 6px; color:var(--navy); font-size:1rem;}
+  .toc-card p{margin:0; font-size:0.85rem; color:var(--muted); line-height:1.5;}
+  .toc-card .read-more{display:inline-block; margin-top:10px; font-size:0.8rem; font-weight:700; color:var(--blue);}
+
+  /* Highlight strip on home */
+  .highlight-strip{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:16px 0;}
+  .highlight-box{background:#fff; border:1px solid var(--border); border-radius:12px; padding:12px; text-align:center;}
+  .highlight-box .num{font-size:1.6rem; font-weight:800; color:var(--navy);}
+  .highlight-box .label{font-size:0.78rem; color:var(--muted); margin-top:4px;}
+
+  /* Checklist */
+  ul.check-list{list-style:none; padding:0; margin:0 0 18px;}
+  ul.check-list li{padding:8px 0 8px 28px; position:relative; font-size:0.93rem; line-height:1.5;}
+  ul.check-list li::before{content:"✓"; position:absolute; left:0; color:var(--green); font-weight:800;}
+  ul.plain-list{padding-left:20px; margin:0 0 18px;}
+  ul.plain-list li{margin-bottom:8px; font-size:0.93rem; line-height:1.5;}
+
+  /* Tables */
+  table.data-table{width:100%; border-collapse:collapse; margin:16px 0 26px; font-size:0.85rem;}
+  table.data-table th{background:var(--navy); color:#fff; text-align:left; padding:10px 12px; font-size:0.78rem;}
+  table.data-table td{padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top;}
+  table.data-table tr:nth-child(even) td{background:#F7F9FC;}
+
+  /* FAQ accordion */
+  .faq-item{border:1px solid var(--border); border-radius:10px; margin-bottom:10px; overflow:hidden;}
+  .faq-q{
+    padding:14px 16px; font-weight:700; font-size:0.92rem; cursor:pointer; display:flex;
+    justify-content:space-between; align-items:center; background:#fff;
+  }
+  .faq-q:hover{background:#F7FAFD;}
+  .faq-q .chev{transition:transform 0.15s; color:var(--muted); font-size:0.8rem;}
+  .faq-q.open .chev{transform:rotate(90deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height 0.2s ease; background:#F7F9FC; padding:0 16px;}
+  .faq-a.open{max-height:300px; padding:14px 16px;}
+  .faq-a p{margin:0; font-size:0.88rem; color:var(--muted);}
+
+  /* Enroll page */
+  .enroll-card{
+    background:linear-gradient(135deg,var(--navy),var(--navy-dark)); color:#fff; border-radius:18px;
+    padding:36px 28px; text-align:center; margin:20px 0;
+  }
+  .enroll-card h2{color:#fff; margin-top:0;}
+  .enroll-card p{color:#C9D4E8;}
+  .price-tag{font-size:2.2rem; font-weight:800; margin:16px 0 4px;}
+  .price-note{font-size:0.8rem; color:#9FC0E8; margin-bottom:22px;}
+  .placeholder-note{
+    background:#FFF6E5; color:#7A5C00; border:1px solid #F0D48A; border-radius:10px;
+    padding:12px 14px; font-size:0.82rem; margin-top:22px; text-align:left;
+  }
+
+  /* Lead-capture enrollment form (temporary, first live class only) */
+  .lead-form{background:#fff; border:1px solid var(--border); border-radius:14px; padding:28px; margin-top:8px; text-align:left;}
+  .lead-form .field{margin-bottom:16px;}
+  .lead-form label{display:block; font-size:0.85rem; font-weight:700; color:var(--text); margin-bottom:6px;}
+  .lead-form input, .lead-form select{
+    width:100%; padding:11px 12px; border:1px solid var(--border); border-radius:8px;
+    font-size:0.92rem; font-family:inherit; background:#fff; color:var(--text);
+  }
+  .lead-form input:focus, .lead-form select:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent);}
+  .lead-form .btn-submit{
+    background:var(--navy); color:#fff; font-weight:800; padding:13px 26px; border-radius:10px;
+    border:none; font-size:0.95rem; cursor:pointer; width:100%; margin-top:6px;
+  }
+  .lead-form .btn-submit:hover{background:var(--navy-dark);}
+  .lead-form .btn-submit:disabled{opacity:0.6; cursor:not-allowed;}
+  .lead-form .form-error{background:#FDEAEA; color:var(--red); border:1px solid #F0C4C4; border-radius:8px; padding:10px 12px; font-size:0.85rem; margin-bottom:14px; display:none;}
+  .lead-form .form-error.show{display:block;}
+  .lead-form .form-note{font-size:0.78rem; color:var(--muted); margin-top:14px; text-align:center;}
+
+  .thankyou-card{background:linear-gradient(135deg,var(--navy),var(--navy-dark)); color:#fff; border-radius:18px; padding:40px 32px; text-align:center; margin:20px 0;}
+  .thankyou-card h2{color:#fff; margin-top:0; font-size:1.6rem;}
+  .thankyou-card p{color:#C9D4E8; font-size:1.02rem; line-height:1.6;}
+  .thankyou-gift{background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); border-radius:12px; padding:18px 22px; margin:22px 0; text-align:left;}
+  .thankyou-gift .gift-label{font-size:0.75rem; text-transform:uppercase; letter-spacing:0.04em; color:#9FC0E8; font-weight:700; margin-bottom:6px;}
+  .next-steps{background:#fff; border:1px solid var(--border); border-radius:14px; padding:26px 28px; margin-top:22px; text-align:left;}
+  .next-steps h3{margin-top:0; color:var(--navy); font-size:1.05rem;}
+  .next-steps ol{margin:0; padding-left:20px; font-size:0.92rem; line-height:1.7; color:var(--text);}
+  .next-steps li{margin-bottom:6px;}
+
+  footer{text-align:center; padding:30px 20px; color:var(--muted); font-size:0.8rem; border-top:1px solid var(--border);}
+
+  /* Job Market page */
+  .live-board-cta{
+    background:#F0F7FF; border:1px solid var(--accent); border-radius:14px;
+    padding:26px; margin:20px 0 30px; text-align:center;
+  }
+  .live-board-cta p{max-width:56ch; margin:0 auto 18px; color:var(--muted);}
+  .live-board-btn{
+    display:inline-flex; align-items:center; gap:8px; background:var(--navy); color:#fff;
+    padding:13px 24px; border-radius:10px; font-size:0.92rem; font-weight:700; text-decoration:none;
+  }
+  .live-board-btn:hover{background:var(--navy-dark);}
+
+  @media (max-width:760px){
+    .toc-grid{grid-template-columns:1fr;}
+    .highlight-strip{grid-template-columns:1fr;}
+    .nav-links{display:none; position:absolute; top:100%; left:0; right:0; background:var(--navy-dark); flex-direction:column; padding:10px; box-shadow:0 6px 14px rgba(0,0,0,0.2);}
+    .nav-links.open{display:flex;}
+    .mobile-menu-btn{display:inline-block;}
+    .nav-cta{display:none;}
+    .hero h1{font-size:1.6rem;}
+  }
+html{scroll-behavior:smooth;}
+#page-casefiles {
+  --ink:#1B2028;
+  --ink-soft:#454B57;
+  --paper:#E7DFCC;
+  --paper-light:#F6F1E5;
+  --paper-white:#FBF8F1;
+  --navy:#1F3864;
+  --navy-deep:#152747;
+  --stamp:#A6301F;
+  --stamp-light:#F1E0DA;
+  --line:#C7BB9D;
+  --line-soft:#DBD2B9;
+}
+#page-casefiles * {box-sizing:border-box;}
+#page-casefiles {scroll-behavior:smooth;}
+#page-casefiles {
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:1.06rem;
+  line-height:1.65;
+}
+#page-casefiles ::selection {background:var(--stamp-light);}
+#page-casefiles .stamp-font { font-family:'Special Elite', monospace; letter-spacing:0.02em; }
+#page-casefiles .col {max-width:800px; margin:0 auto; padding:0 28px;}
+#page-casefiles .col-wide {max-width:1080px; margin:0 auto; padding:0 28px;}
+#page-casefiles h1, #page-casefiles h2, #page-casefiles h3 {font-family:'Source Serif 4', Georgia, serif; color:var(--ink); font-weight:600; margin:0;}
+#page-casefiles a {color:inherit;}
+#page-casefiles .topbar {
+  padding:22px 0 18px;
+  border-bottom:1px solid var(--line);
+}
+#page-casefiles .topbar-inner {display:flex; justify-content:space-between; align-items:baseline;}
+#page-casefiles .topbar .mark {font-weight:700; font-size:1.02rem;}
+#page-casefiles .topbar .mark span {color:var(--stamp);}
+#page-casefiles .topbar .tagline {font-size:0.82rem; color:var(--ink-soft); font-style:italic;}
+#page-casefiles .cf-hero {padding:72px 0 64px;}
+#page-casefiles .hero-grid {display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:start;}
+@media(max-width:860px){
+#page-casefiles .hero-grid {grid-template-columns:1fr; gap:44px;}
+}
+#page-casefiles .cf-hero .kicker {
+  font-family:'Special Elite', monospace;
+  font-size:0.78rem;
+  color:var(--stamp);
+  margin-bottom:22px;
+  display:inline-block;
+  border:1.5px solid var(--stamp);
+  padding:4px 12px;
+  transform:rotate(-1.2deg);
+}
+#page-casefiles .cf-hero h1 {
+  font-size:2.55rem;
+  line-height:1.18;
+  letter-spacing:-0.01em;
+}
+#page-casefiles .cf-hero .lede {
+  margin-top:26px;
+  font-size:1.16rem;
+  color:var(--ink-soft);
+  max-width:52ch;
+  line-height:1.6;
+}
+#page-casefiles .cf-hero .cta-row {margin-top:36px; display:flex; gap:18px; align-items:center; flex-wrap:wrap;}
+#page-casefiles .btn-stamp {
+  font-family:'Special Elite', monospace;
+  background:var(--navy);
+  color:var(--paper-white);
+  border:none;
+  padding:15px 26px;
+  font-size:0.92rem;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+  position:relative;
+  transition:transform 0.15s ease;
+}
+#page-casefiles .btn-stamp:hover {transform:translateY(-2px) rotate(-0.4deg);}
+#page-casefiles .btn-ghost {
+  font-size:0.95rem;
+  color:var(--ink-soft);
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+#page-casefiles .exhibit {
+  background:var(--paper-white);
+  border:1px solid var(--line);
+  box-shadow:6px 6px 0 rgba(27,32,40,0.07);
+  padding:26px 28px 64px;
+  transform:rotate(1.4deg);
+  position:relative;
+  margin-top:6px;
+}
+#page-casefiles .exhibit::before {
+  content:"EXHIBIT A";
+  position:absolute;
+  top:-13px;
+  left:26px;
+  background:var(--navy);
+  color:var(--paper-white);
+  font-family:'Special Elite', monospace;
+  font-size:0.72rem;
+  padding:4px 12px;
+}
+#page-casefiles .exhibit .exhibit-meta {
+  font-family:'Special Elite', monospace;
+  font-size:0.72rem;
+  color:var(--ink-soft);
+  margin-top:10px;
+}
+#page-casefiles .exhibit h3 {font-size:1.2rem; margin-top:10px; line-height:1.3;}
+#page-casefiles .exhibit .field {margin-top:18px;}
+#page-casefiles .exhibit .field-label {font-family:'Special Elite', monospace; font-size:0.68rem; color:var(--stamp); margin-bottom:5px;}
+#page-casefiles .exhibit .field-text {font-size:0.95rem; line-height:1.5;}
+#page-casefiles .exhibit .stamp-mark {
+  position:absolute;
+  bottom:16px;
+  right:22px;
+  border:2.5px solid var(--stamp);
+  color:var(--stamp);
+  font-family:'Special Elite', monospace;
+  font-size:0.68rem;
+  padding:6px 10px;
+  transform:rotate(-8deg);
+  opacity:0.82;
+  background:var(--paper-white);
+}
+#page-casefiles section {padding:64px 0;}
+#page-casefiles .section-label {
+  font-family:'Special Elite', monospace;
+  font-size:0.78rem;
+  color:var(--stamp);
+  margin-bottom:10px;
+}
+#page-casefiles .cf-section-title {font-size:1.9rem; max-width:22ch; line-height:1.25;}
+#page-casefiles .section-intro {margin-top:16px; font-size:1.08rem; color:var(--ink-soft); max-width:62ch;}
+#page-casefiles .rule {border:none; border-top:1px solid var(--line); margin:0;}
+#page-casefiles .contrast {
+  margin-top:44px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border:1px solid var(--line);
+}
+@media(max-width:760px){
+#page-casefiles .contrast {grid-template-columns:1fr;}
+}
+#page-casefiles .contrast > div {padding:34px 32px;}
+#page-casefiles .contrast .old {background:var(--paper-light); border-right:1px solid var(--line);}
+@media(max-width:760px){
+#page-casefiles .contrast .old {border-right:none; border-bottom:1px solid var(--line);}
+}
+#page-casefiles .contrast .new {background:var(--paper-white);}
+#page-casefiles .contrast .cf-label {
+  font-family:'Special Elite', monospace;
+  font-size:0.74rem;
+  color:var(--ink-soft);
+  margin-bottom:16px;
+}
+#page-casefiles .contrast .new .cf-label {color:var(--stamp);}
+#page-casefiles .contrast blockquote {
+  margin:0 0 18px;
+  font-size:1.14rem;
+  font-style:italic;
+  line-height:1.55;
+  padding-left:18px;
+  border-left:2px solid var(--line);
+}
+#page-casefiles .contrast .new blockquote {border-left-color:var(--stamp);}
+#page-casefiles .contrast p.note {font-size:0.95rem; color:var(--ink-soft); margin:0;}
+#page-casefiles .beats {margin-top:44px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line); border-left:1px solid var(--line);}
+@media(max-width:900px){
+#page-casefiles .beats {grid-template-columns:1fr 1fr;}
+}
+@media(max-width:520px){
+#page-casefiles .beats {grid-template-columns:1fr;}
+}
+#page-casefiles .beat {padding:28px 24px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--paper-light);}
+#page-casefiles .beat .cf-num {font-family:'Special Elite', monospace; color:var(--stamp); font-size:0.85rem; margin-bottom:14px;}
+#page-casefiles .beat h3 {font-size:1.08rem; margin-bottom:10px; line-height:1.3;}
+#page-casefiles .beat p {font-size:0.94rem; color:var(--ink-soft); margin:0;}
+#page-casefiles .files-header {padding:64px 0 8px;}
+#page-casefiles .file {
+  margin:0 0 40px;
+  background:var(--paper-white);
+  border:1px solid var(--line);
+  position:relative;
+}
+#page-casefiles .file-tab {
+  display:inline-block;
+  font-family:'Special Elite', monospace;
+  font-size:0.8rem;
+  background:var(--navy);
+  color:var(--paper-white);
+  padding:7px 18px;
+  position:relative;
+  top:-1px;
+  left:24px;
+}
+#page-casefiles .file-body {padding:8px 40px 36px;}
+@media(max-width:640px){
+#page-casefiles .file-body {padding:8px 22px 30px;}
+}
+#page-casefiles .file-company {font-size:1.5rem; margin-top:6px;}
+#page-casefiles .file-title {font-size:1.02rem; font-style:italic; color:var(--ink-soft); margin-top:4px;}
+#page-casefiles .file-brief {margin-top:20px; font-size:1.08rem; max-width:66ch;}
+#page-casefiles .file-brief .quote-mark {color:var(--stamp); font-size:1.3em;}
+#page-casefiles .file-thread {
+  margin-top:18px;
+  display:inline-block;
+  font-size:0.86rem;
+  color:var(--stamp);
+  border-bottom:1px dotted var(--stamp);
+}
+#page-casefiles .file-cta {margin-top:14px;}
+#page-casefiles .file-cta a {
+  display:inline-block;
+  font-family:'Special Elite', monospace;
+  font-size:0.82rem;
+  color:var(--paper-white);
+  background:var(--stamp);
+  padding:9px 16px;
+  text-decoration:none;
+  border-radius:2px;
+}
+#page-casefiles .file-cta a:hover {background:#8A2819;}
+#page-casefiles .labs-grid {margin-top:28px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:22px;}
+@media(max-width:760px){
+#page-casefiles .labs-grid {grid-template-columns:1fr;}
+}
+#page-casefiles .lab-block .lab-num {font-family:'Special Elite', monospace; font-size:0.72rem; color:var(--ink-soft); margin-bottom:6px;}
+#page-casefiles .lab-block h4 {font-size:0.98rem; margin-bottom:8px; line-height:1.35;}
+#page-casefiles .lab-block ul {margin:0; padding-left:18px; font-size:0.87rem; color:var(--ink-soft);}
+#page-casefiles .lab-block li {margin-bottom:5px;}
+#page-casefiles .thread-box {
+  margin-top:36px;
+  background:var(--paper-white);
+  border:1px solid var(--line);
+  padding:36px 40px;
+}
+@media(max-width:640px){
+#page-casefiles .thread-box {padding:26px 22px;}
+}
+#page-casefiles .thread-box blockquote {
+  font-size:1.2rem;
+  font-style:italic;
+  margin:0 0 18px;
+  line-height:1.55;
+}
+#page-casefiles .thread-box p {font-size:0.98rem; color:var(--ink-soft); margin:0;}
+#page-casefiles .closing {background:var(--navy); color:var(--paper-white); padding:76px 0;}
+#page-casefiles .closing h2 {color:var(--paper-white); font-size:2.1rem; max-width:18ch; line-height:1.28;}
+#page-casefiles .closing p {color:#C9D4E8; font-size:1.1rem; max-width:58ch; margin-top:20px;}
+#page-casefiles .closing .cta-row {margin-top:32px;}
+#page-casefiles .closing .btn-stamp {background:var(--stamp);}
+#page-casefiles footer {padding:32px 0; font-size:0.85rem; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="brand" onclick="goTo('home')">SAP Controls Mastery<span>TIB Systems LLC</span></div>
+    <button class="mobile-menu-btn" onclick="toggleMobileNav()">☰</button>
+    <div class="nav-links" id="nav-links">
+      <a onclick="goTo('home')" data-page="home">Home</a>
+      <a onclick="goTo('why')" data-page="why">Why This Career</a>
+      <a onclick="goTo('different')" data-page="different">What's Different</a>
+      <a onclick="goTo('casefiles')" data-page="casefiles">See Real SAP Control Failures</a>
+      <a onclick="goTo('included')" data-page="included">What's Included</a>
+      <a onclick="goTo('journey')" data-page="journey">Your Journey</a>
+      <a onclick="goTo('capabilities')" data-page="capabilities">Capabilities</a>
+      <a onclick="goTo('jobmarket')" data-page="jobmarket">Live Job Market</a>
+      <a onclick="goTo('outcomes')" data-page="outcomes">What This Means for You</a>
+      <a onclick="goTo('faq')" data-page="faq">FAQ</a>
+    </div>
+    <a class="nav-cta" href="https://live-course1-2-homepage.vercel.app/" target="_blank" rel="noopener">See Course &amp; Class Schedule →</a>
+  </div>
+</nav>
+
+<!-- ============ HOME ============ -->
+<section class="page active" id="page-home">
+  <div class="hero">
+    <h1>Become Interview-Ready and Job-Ready in SAP SOX/ITGC Controls</h1>
+    <p>You don't need a programming background. You need judgment, discipline, and real practice — and this course is built to give you all three, from your first day to your first interview.</p>
+    <h3 class="hero-subhead">Roles this prepares you for</h3>
+    <div class="title-tags">
+      <span class="title-tag">SAP GRC / ITGC Controls Consultant</span>
+      <span class="title-tag">IT Auditor — SAP Systems</span>
+      <span class="title-tag">SOX Compliance Analyst (SAP)</span>
+      <span class="title-tag">SAP Security &amp; Controls Analyst</span>
+      <span class="title-tag">Internal Audit Associate, SAP Engagements</span>
+      <span class="title-tag">Advisory Associate, SAP SOX Engagements</span>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn-primary" onclick="goTo('why')">Explore the Course ↓</a>
+    </div>
+    <p class="hero-softlink">Not ready to pick a class yet? <a onclick="goTo('enroll')">Get the free Career Guide</a> instead.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="highlight-strip">
+      <div class="highlight-box"><div class="num">22</div><div class="label">Documented deficiencies</div></div>
+      <div class="highlight-box"><div class="num">8</div><div class="label">Weeks, live cohort</div></div>
+      <div class="highlight-box"><div class="num">90%</div><div class="label">Graded on judgement</div></div>
+    </div>
+
+    <h2 class="section-title">Why This Course</h2>
+    <p class="lead">SOX compliance testing is permanent, recurring demand — required by law, every year, for every public company. Most training only teaches you to recite rules. This course teaches you to actually perform: read a real access extract, pull the evidence yourself in a live SAP system, and defend your reasoning in a live interview.</p>
+
+    <h2 class="section-title">Explore the Full Course</h2>
+    <p class="lead">This homepage is your table of contents — everything in this brochure is one click away.</p>
+    <div class="toc-grid">
+      <a class="toc-card" onclick="goTo('why')">
+        <div class="toc-icon">📜</div>
+        <h4>Why This Career Exists</h4>
+        <p>The law, the business reality, and the skills gap that make this career permanent and in-demand.</p>
+        <span class="read-more">Read more →</span>
+      </a>
+      <a class="toc-card" onclick="goTo('different')">
+        <div class="toc-icon">⚡</div>
+        <h4>What Makes This Course Different</h4>
+        <p>Judgment over memorization, real hands-on SAP practice, and a fully connected curriculum.</p>
+        <span class="read-more">Read more →</span>
+      </a>
+      <a class="toc-card" onclick="goTo('included')">
+        <div class="toc-icon">📦</div>
+        <h4>What's Included</h4>
+        <p>Every document, app, and hands-on exercise you get when you enroll.</p>
+        <span class="read-more">Read more →</span>
+      </a>
+      <a class="toc-card" onclick="goTo('journey')">
+        <div class="toc-icon">🗓️</div>
+        <h4>Your Course Journey</h4>
+        <p>Exactly how each live, eight-week course runs, week by week, start to finish.</p>
+        <span class="read-more">Read more →</span>
+      </a>
+      <a class="toc-card" onclick="goTo('capabilities')">
+        <div class="toc-icon">🎯</div>
+        <h4>What You'll Be Capable Of</h4>
+        <p>The concrete, job-ready skills you'll walk away with.</p>
+        <span class="read-more">Read more →</span>
+      </a>
+      <a class="toc-card toc-card-highlight" onclick="goTo('jobmarket')">
+        <div class="toc-icon">🌍</div>
+        <h4>Live Job Market — See the Real Demand</h4>
+        <p>Search live openings globally and browse our always-current SAP GRC/SOX/ITGC job board.</p>
+        <span class="read-more">See real jobs →</span>
+      </a>
+      <a class="toc-card" onclick="goTo('outcomes')">
+        <div class="toc-icon">💼</div>
+        <h4>What This Means for You</h4>
+        <p>Faster job-readiness, a real portfolio piece, and interview practice before it counts.</p>
+        <span class="read-more">Read more →</span>
+      </a>
+      <a class="toc-card" onclick="goTo('faq')">
+        <div class="toc-icon">❓</div>
+        <h4>Frequently Asked Questions</h4>
+        <p>Background requirements, pacing, retakes, and what happens after you finish.</p>
+        <span class="read-more">Read more →</span>
+      </a>
+      <a class="toc-card" onclick="goTo('enroll')">
+        <div class="toc-icon">📩</div>
+        <h4>Get the Free Career Guide</h4>
+        <p>Not ready to pick a class yet? Get the free guide and we'll follow up personally when you are.</p>
+        <span class="read-more">Get the guide →</span>
+      </a>
+      <a class="toc-card toc-card-highlight" href="https://live-course1-2-homepage.vercel.app/" target="_blank" rel="noopener">
+        <div class="toc-icon">🚀</div>
+        <h4>See Course &amp; Class Schedule</h4>
+        <p>Curious what it actually looks like? See the full course page — the case, the schedule, and real pricing for The Full Sweep.</p>
+        <span class="read-more">See the course page →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="page" id="page-why">
+  <div class="wrap">
+    <h2 class="section-title">Why This Career Exists</h2>
+    <p class="lead">This isn't a niche skill with uncertain demand. It exists because of a law, a business reality, and a persistent skills gap — and all three point in your favor.</p>
+
+    <h3>A Legal Requirement, Every Year, Forever</h3>
+    <p>The Sarbanes-Oxley Act requires every U.S. public company to test its internal control over financial reporting — every single year, for as long as the company is public. This isn't a one-time project market. It's permanent, recurring demand.</p>
+
+    <h3>SAP Is Everywhere</h3>
+    <p>A huge share of the world's enterprise transactions run through SAP. Access inside SAP is powerful — a single login can move money, change prices, or alter vendor bank details — which is exactly why it must be independently and repeatedly tested.</p>
+
+    <h3>Most People Only Have Half the Skillset</h3>
+    <p>Traditional auditors understand control theory but not SAP's technical internals. IT professionals understand SAP but not audit methodology. This career lives in the gap between those two worlds — and that gap is exactly why the people who can bridge it are in demand.</p>
+  </div>
+</section>
+
+<!-- ============ DIFFERENT ============ -->
+<section class="page" id="page-different">
+  <div class="wrap">
+    <h2 class="section-title">What Makes This Course Different</h2>
+    <p class="lead">Five deliberate design choices set this apart from a slide deck and a quiz.</p>
+
+    <h3>1. Judgment, Not Memorization</h3>
+    <p>A quarter of the course's scenarios are deliberately clean, well-designed access with no real problem. You're graded on correctly recognizing that too — not just on spotting conflicts. That's what builds real judgment instead of reflexive pattern-matching.</p>
+
+    <h3>2. A Complete Path — Reasoning to Certificate</h3>
+    <p>Most training covers one slice: a slide deck, or a canned lab. This course runs the full path: reasoning through the population and the risk before you touch SAP, a live instructor walkthrough of the real system, hands-on lab time on your own login, three real workpapers marked by a facilitator — not an algorithm — and a certificate of completion. The same complete method, five times over, once per course.</p>
+
+    <h3>3. Real Hands-On SAP Practice</h3>
+    <p>You won't just read about SUIM, GRC Access Risk Analysis, or PFCG roles — you'll watch an instructor run them live, then run them yourself in a real SAP/GRC training environment. This is the single biggest gap in most training programs, and it's built directly into this one.</p>
+
+    <h3>4. Every Course Is a Real, Continuous Investigation</h3>
+    <p>This isn't disconnected scenarios. It's five companies — Thornfield Industrial Group, Calder Ridge Manufacturing, Wrenfield Holdings, Solveris Technologies, and Draymoor Global Holdings — each with its own real story spanning twenty-two control failures, worked in the order a real engagement actually forces on you: reason through the population and the risk first, execute in SAP, write your own conclusion before you're shown the model answer, then defend it against a reviewer who doesn't believe you yet. A finding you worked in Course 1 recurs, changed, in Course 3 — because that's how pattern recognition actually gets built.</p>
+    <p><a onclick="goTo('casefiles')" style="font-weight:600; cursor:pointer;">See exactly how the five-company curriculum works &rarr;</a></p>
+
+    <h3>5. Two Schedules, Same Live Standard</h3>
+    <p>Every session is live — choose whichever fits your week. Monday/Wednesday/Friday evenings, or Saturday and Sunday. Same instructor, same case, same certificate, either way. Interrupt, argue, get answered in the room — no recordings, no self-paced substitute.</p>
+  </div>
+</section>
+
+<!-- ============ INCLUDED ============ -->
+<section class="page" id="page-included">
+  <div class="wrap">
+    <h2 class="section-title">What's Included When You Enroll</h2>
+    <p class="lead">Every document, template, and live session below is included from day one.</p>
+    <table class="data-table" id="included-table"></table>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section class="page" id="page-journey">
+  <div class="wrap">
+    <h2 class="section-title">Your Course Journey</h2>
+    <p class="lead">Eight weeks, fully live — choose Monday/Wednesday/Friday evenings or a Saturday + Sunday schedule. Here's how each course runs, start to finish.</p>
+    <table class="data-table" id="journey-table"></table>
+  </div>
+</section>
+
+<!-- ============ CAPABILITIES ============ -->
+<section class="page" id="page-capabilities">
+  <div class="wrap">
+    <h2 class="section-title">What You'll Be Capable of Doing</h2>
+    <p class="lead">By the time you finish, you'll be able to:</p>
+    <ul class="check-list">
+      <li>Identify and correctly categorize SAP control risks — SoD conflicts, sensitive access, configuration risk, and more — across Finance, Procurement, Sales, Security, and HR.</li>
+      <li>Design a real, testable detection procedure for a given risk using actual SAP tools and reports.</li>
+      <li>Recommend a fix that solves the risk without breaking the business process it supports.</li>
+      <li>Tell the difference between genuine risk and well-designed access — avoiding the costly over-flagging that undermines credibility.</li>
+      <li>Recognize the same underlying risk pattern across different modules, instead of memorizing disconnected rules.</li>
+      <li>Walk into a live SAP system and pull the evidence yourself — not just read about it.</li>
+      <li>Answer a live, unscripted follow-up question with confidence — the same kind of pushback a reviewer gives you in every one of the 22 Books.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ JOB MARKET ============ -->
+<section class="page" id="page-jobmarket">
+  <div class="wrap">
+    <h2 class="section-title">Live Job Market — See the Real Demand</h2>
+    <p class="lead">Don't take our word for it. Browse our continuously-refreshed job board for exactly the skills this course teaches — real listings, updated daily.</p>
+
+    <div class="live-board-cta">
+      <h3 style="margin-top:0;">Real Openings, Updated Automatically</h3>
+      <p>For a live, continuously refreshed feed of real SAP GRC/SOX/ITGC roles — instead of a one-time snapshot that goes stale — browse our dedicated job-market app.</p>
+      <a class="live-board-btn" href="https://sap-grc-job-mkt-auto-refresh.vercel.app/" target="_blank" rel="noopener">🌍 Open the Live Job Market App ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUTCOMES ============ -->
+<section class="page" id="page-outcomes">
+  <div class="wrap">
+    <h2 class="section-title">What This Means for You</h2>
+
+    <h3>A Faster Path to Job-Ready</h3>
+    <p>Instead of an open-ended, unstructured ramp-up, you follow a defined path with a clear finish line — eight weeks from start to a completed, verifiable set of skills.</p>
+
+    <h3>A Real Portfolio Piece</h3>
+    <p>Your three completed workpapers are something concrete you can describe in an interview — not just a claim on a resume, but real testing you performed and defended, on a real system.</p>
+
+    <h3>A Reviewer Who Pushes Back Before a Client Does</h3>
+    <p>Every one of the 22 Books ends with a reviewer challenge — a live pushback question with a model answer you never see until you've answered for yourself first. Your first time defending your reasoning to someone who doesn't believe you isn't in front of a client — it's here.</p>
+
+    <h3>A Credential That Stands Out</h3>
+    <p>Completing SAP Controls Mastery gives you something specific and verifiable to put on your resume — exactly the kind of concrete signal recruiters look for from a candidate without direct prior experience.</p>
+
+    <h3>Confidence Built on Being Tested, Not Just Taught</h3>
+    <p>Every stage of this course checks your understanding — planning cards, live hands-on lab testing, and workpapers marked by a facilitator, not an algorithm. You'll finish knowing exactly where you stand, not just hoping you absorbed enough.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="page" id="page-faq">
+  <div class="wrap">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div id="faq-list"></div>
+  </div>
+</section>
+
+<!-- ============ CASE FILES (merged) ============ -->
+<section class="page" id="page-casefiles">
+
+
+<!-- ============ HERO ============ -->
+<section class="cf-hero">
+  <div class="col-wide hero-grid">
+    <div>
+      <div class="kicker stamp-font">FIVE CASE FILES · ONE METHOD</div>
+      <h1>Real controls training doesn't start with a transaction code.</h1>
+      <p class="lede">It starts with a company, a gap nobody meant to leave, and a question you have to answer before you're allowed to open SAP. Five companies. Nine investigations each. The reasoning comes first — every time — because that's the order it happens in on a real engagement.</p>
+      <div class="cta-row">
+        <a class="btn-stamp stamp-font" href="#cf-files">See the five case files</a>
+        <a class="btn-ghost" href="#cf-method">How the method works</a>
+      </div>
+    </div>
+    <div class="exhibit">
+      <div class="exhibit-meta">CASE FILE 01 · THORNFIELD INDUSTRIAL GROUP</div>
+      <h3>Book 01 — The Access List</h3>
+      <div class="field">
+        <div class="field-label">1 · SITUATION</div>
+        <div class="field-text">Thornfield merged two regional operations five years ago. Rebuilding the access roles over a weekend left two permissions sitting in the same role.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">14 · REVIEWER CHALLENGE</div>
+        <div class="field-text">&ldquo;Thirty-eight of these are mitigated, so really we're talking about three. Let's deal with the three.&rdquo;</div>
+      </div>
+      <div class="stamp-mark">ANSWER BEFORE REVEAL</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ WHY NOT A MANUAL ============ -->
+<section id="cf-why">
+  <div class="col-wide">
+    <div class="section-label stamp-font">WHY THIS ISN'T A MANUAL</div>
+    <h2 class="cf-section-title">Most SAP controls training teaches you where the buttons are. This teaches you what to look for before you touch one.</h2>
+    <p class="section-intro">Both matter. Only one of them is what actually gets tested when a client asks you a follow-up question. Here's the same moment, told two ways — one from a conventional course, one from an actual TIB case file.</p>
+
+    <div class="contrast">
+      <div class="old">
+        <div class="cf-label stamp-font">CONVENTIONAL TRAINING</div>
+        <blockquote>&ldquo;Run GRAC_ARA. Set Analysis Level = User. Execute.&rdquo;</blockquote>
+        <p class="note">Correct, and useless on its own. It tells you how to run a report. It says nothing about why this report, why now, or what a clean result would actually prove.</p>
+      </div>
+      <div class="new">
+        <div class="cf-label stamp-font">TIB CASE FILE — BOOK 01, THORNFIELD</div>
+        <blockquote>&ldquo;Nobody in this story did anything wrong. So how did the gap get there?&rdquo;</blockquote>
+        <p class="note">The transaction code shows up later in the same book — once you've argued out the population, written your own conclusion before seeing ours, and had it challenged by a reviewer who doesn't believe you yet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ THE METHOD ============ -->
+<section id="cf-method">
+  <div class="col-wide">
+    <div class="section-label stamp-font">THE METHOD</div>
+    <h2 class="cf-section-title">Every one of the forty-five books in this curriculum runs on the same four beats.</h2>
+    <p class="section-intro">Not because it's tidy. Because this is the order an actual engagement forces on you, and rehearsing it forty-five times in a safe room is what makes it automatic on a live one.</p>
+
+    <div class="beats">
+      <div class="beat">
+        <div class="cf-num stamp-font">01</div>
+        <h3>You reason before you're allowed to type</h3>
+        <p>Situation, business risk, population, evidence plan — the full planning card comes first. &ldquo;Planning Card before transaction code&rdquo; isn't a slogan here, it's an enforced rule.</p>
+      </div>
+      <div class="beat">
+        <div class="cf-num stamp-font">02</div>
+        <h3>You execute, click by click, display only</h3>
+        <p>Every execution step is real SAP GUI and Fiori navigation, tied to the population you just defined — and you never press a button that changes something. This is testing, not a sandbox.</p>
+      </div>
+      <div class="beat">
+        <div class="cf-num stamp-font">03</div>
+        <h3>You conclude before you're shown the answer</h3>
+        <p>Write your own conclusion first. Only then does the model conclusion reveal itself — so you find out what you got wrong while it still costs nothing.</p>
+      </div>
+      <div class="beat">
+        <div class="cf-num stamp-font">04</div>
+        <h3>You defend it against someone who doesn't buy it</h3>
+        <p>Every book ends with a reviewer challenge and a facilitator-only gate — a pushback question with a model answer you never see until you've answered for yourself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ FIVE CASE FILES ============ -->
+<section id="cf-files" class="files-header">
+  <div class="col-wide">
+    <div class="section-label stamp-font">THE CURRICULUM</div>
+    <h2 class="cf-section-title">Five companies. Five ongoing investigations. Each one builds on the last.</h2>
+    <p class="section-intro">The courses are sequential by design — each company's case file assumes you've already closed the ones before it. Together they cover access and identity, change management, record-to-report, GRC governance, multi-entity integration, AI-era risk, and disclosure — the full range a working SAP controls consultant is actually expected to handle.</p>
+  </div>
+</section>
+
+<div class="col-wide" id="cf-files-list">
+
+  <div class="file">
+    <div class="file-tab">CASE FILE 01</div>
+    <div class="file-body">
+      <div class="file-company">Thornfield Industrial Group</div>
+      <div class="file-title">&ldquo;The Full Sweep&rdquo;</div>
+      <p class="file-brief"><span class="quote-mark">&ldquo;</span>Two regional operations merged five years ago. A weekend spent rebuilding access roles left one Accounts Payable role holding both vendor setup and payment authority — and nobody has looked since.<span class="quote-mark">&rdquo;</span></p>
+      <div class="file-thread">The foundation course — introduces the reasoning discipline every later course assumes.</div>
+      <div class="file-cta"><a href="https://live-course1-2-homepage.vercel.app/" target="_blank" rel="noopener">This course now has a real schedule &amp; price — see The Full Sweep →</a></div>
+      <div class="labs-grid">
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 1</div>
+          <h4>Access, Identity &amp; Authorization</h4>
+          <ul><li>SoD conflict analysis at user vs. role level</li><li>Firefighter / emergency access governance</li><li>Joiner-mover-leaver population testing</li></ul>
+        </div>
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 2</div>
+          <h4>Change, Operations &amp; the Data Estate</h4>
+          <ul><li>Transport approval integrity</li><li>Disaster-recovery restoration testing</li><li>Interface population reconciliation</li></ul>
+        </div>
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 3</div>
+          <h4>R2R, GRC Platform &amp; Governance</h4>
+          <ul><li>Automated control configuration testing</li><li>Continuous Controls Monitoring reliability</li><li>SOX 404/302 &amp; SEC cyber disclosure timing</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="file">
+    <div class="file-tab">CASE FILE 02</div>
+    <div class="file-body">
+      <div class="file-company">Calder Ridge Manufacturing, Inc.</div>
+      <div class="file-title">&ldquo;The False Positive&rdquo;</div>
+      <p class="file-brief"><span class="quote-mark">&ldquo;</span>Every control at Calder Ridge is signed off, on schedule, without exception — for years. This file doesn't ask whether the paperwork is clean. It asks whether anyone is actually looking.<span class="quote-mark">&rdquo;</span></p>
+      <div class="file-thread">The recurring question: documented, or operating? They are not the same claim.</div>
+      <div class="labs-grid">
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 1</div>
+          <h4>Access Control &amp; Identity</h4>
+          <ul><li>Mitigating-control substance testing</li><li>Firefighter assignment governance</li><li>Post-redesign risk re-analysis</li></ul>
+        </div>
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 2</div>
+          <h4>Change Management &amp; Computer Operations</h4>
+          <ul><li>Emergency-change reconciliation</li><li>Backup-vs-restoration testing</li><li>Retroactive code security review</li></ul>
+        </div>
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 3</div>
+          <h4>Record to Report / GRC Platform</h4>
+          <ul><li>Journal-entry threshold clustering</li><li>CCM alert disposition testing</li><li>Risk-register currency</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="file">
+    <div class="file-tab">CASE FILE 03</div>
+    <div class="file-body">
+      <div class="file-company">Wrenfield Holdings, Inc. / Castellane Systems</div>
+      <div class="file-title">&ldquo;The Seam&rdquo;</div>
+      <p class="file-brief"><span class="quote-mark">&ldquo;</span>Wrenfield acquired Castellane eighteen months ago. The systems were integrated. The controls were not — and the gap between the two sits exactly where nobody was assigned to look.<span class="quote-mark">&rdquo;</span></p>
+      <div class="file-thread">Multi-entity by design: every finding lives in the seam between two companies' systems.</div>
+      <div class="labs-grid">
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 1</div>
+          <h4>Access Control &amp; Identity — Multi-Entity</h4>
+          <ul><li>Role scope-drift testing</li><li>Shared / generic ID attribution</li><li>GRC approval workflow substance</li></ul>
+        </div>
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 2</div>
+          <h4>Change &amp; Operations — Cross-Entity</h4>
+          <ul><li>Shared-services rollback governance</li><li>Cross-entity SOC vendor reliance</li><li>Inherited-codebase risk triage</li></ul>
+        </div>
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 3</div>
+          <h4>R2R &amp; Consolidation — Post-Merger</h4>
+          <ul><li>Intercompany elimination testing</li><li>Management override timing</li><li>Control design vs. operating effectiveness</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="file">
+    <div class="file-tab">CASE FILE 04</div>
+    <div class="file-body">
+      <div class="file-company">Solveris Technologies, Inc.</div>
+      <div class="file-title">&ldquo;The Last Line&rdquo;</div>
+      <p class="file-brief"><span class="quote-mark">&ldquo;</span>Solveris went public eighteen months ago. It has already restated once. Now the SEC is asking questions, and the Lead on this engagement has no senior above her.<span class="quote-mark">&rdquo;</span></p>
+      <div class="file-thread">AI-era consulting: the thing you're testing might be a model, a bot, or the code an assistant wrote.</div>
+      <div class="labs-grid">
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 1</div>
+          <h4>Access, Change &amp; Record to Report</h4>
+          <ul><li>SoD ruleset currency after reorganization</li><li>AI-assisted change review substance</li><li>RPA-drafted journal entry scope creep</li></ul>
+        </div>
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 2</div>
+          <h4>Revenue, Governance &amp; Disclosure Crisis</h4>
+          <ul><li>Revenue-recognition change control</li><li>Remediation verification after restatement</li><li>Evidence-log discipline under live regulatory inquiry</li></ul>
+        </div>
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 3</div>
+          <h4>Access, Identity &amp; GRC Platform (AI-Era)</h4>
+          <ul><li>AI-tuned monitoring-threshold validation</li><li>Bot-originated emergency access review</li><li>Functional testing of AI-generated authorization logic</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="file">
+    <div class="file-tab">CASE FILE 05</div>
+    <div class="file-body">
+      <div class="file-company">Draymoor Global Holdings, Inc.</div>
+      <div class="file-title">&ldquo;SOX Using AI&rdquo;</div>
+      <p class="file-brief"><span class="quote-mark">&ldquo;</span>A bot has been posting Draymoor's journal entries for three years. Nobody has ever run a conflict check on its account — because nobody thought to ask whether a login needs a person behind it.<span class="quote-mark">&rdquo;</span></p>
+      <div class="file-thread">The capstone course: nine books that end by compounding three domains into one finding.</div>
+      <div class="labs-grid">
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 1</div>
+          <h4>Emerging Technology &amp; Non-Human Accounts</h4>
+          <ul><li>Service-account SoD testing</li><li>ML model drift testing</li><li>Realized-fraud assumption testing</li></ul>
+        </div>
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 2</div>
+          <h4>Disclosure, Monitoring &amp; Governance</h4>
+          <ul><li>Cybersecurity incident aggregation materiality</li><li>Alert-triage-at-scale testing</li><li>Execution vs. design root-cause analysis</li></ul>
+        </div>
+        <div class="lab-block">
+          <div class="lab-num stamp-font">LAB 3</div>
+          <h4>CI/CD, Resilience &amp; Capstone</h4>
+          <ul><li>Pipeline approval-gate testing</li><li>Security-backlog governance</li><li>A nine-book capstone compounding three domains into one finding</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ============ THE THREAD ============ -->
+<section id="cf-thread">
+  <div class="col-wide">
+    <div class="section-label stamp-font">THE THREAD THROUGH ALL FIVE</div>
+    <h2 class="cf-section-title">Every case file ends the same way it's built: by naming the pattern, not just the finding.</h2>
+    <div class="thread-box">
+      <blockquote>&ldquo;The test: would a failure actually show up in the artifact you're relying on? If not, you are holding the wrong evidence.&rdquo;</blockquote>
+      <p>That line closes every one of the five courses, because the same underlying error — mistaking the document of a control for evidence the control operated — reappears in a different disguise in six of every nine books. Recognizing the pattern, not memorizing the transaction code, is what actually transfers to a client site you've never seen before. That's the entire bet this curriculum makes, and it's why the five courses are built to be taken as one discipline rather than five unrelated electives.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="closing">
+  <div class="col-wide">
+    <h2>Day one shouldn't be the first time you've had to think like this.</h2>
+    <p>Every course in this curriculum is built so the judgment you bring to a client's system on your first week is judgment you've already exercised nine times over, in a room where getting it wrong is how you learn — not how you get replaced on the engagement.</p>
+    <div class="cta-row">
+      <a class="btn-stamp stamp-font" onclick="goTo('enroll')" style="cursor:pointer;">Enroll now</a>
+      <a class="btn-ghost" href="#cf-files" style="color:#C9D4E8;">Review the five case files again</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="col-wide">TIB Systems LLC · SAP Controls Mastery</div>
+</footer>
+
+
+</section>
+
+<!-- ============ ENROLL ============ -->
+<section class="page" id="page-enroll">
+  <div class="wrap">
+    <div class="enroll-card">
+      <h2>Enroll in SAP Controls Mastery</h2>
+      <p>Everything in this brochure — the live sessions, the labs, the workpapers, and the certificate — is included.</p>
+      <div class="price-tag" id="enroll-systeme-price" style="display:none;">Enroll Today</div>
+      <div class="price-note" id="enroll-systeme-note" style="display:none;">Secure checkout via Systeme.io</div>
+      <a class="btn-primary" id="enroll-systeme-btn" href="https://tib-systems.systeme.io/sap-controls-mastery" target="_blank" rel="noopener" style="display:none;">Enroll Now →</a>
+    </div>
+
+    <!-- Temporary lead-capture form -- shown while ENROLLMENT_MODE = 'lead-capture' -->
+    <div id="enroll-leadform-wrap">
+      <p style="text-align:center; color:var(--muted); font-size:0.92rem; margin-bottom:18px;">Registration for the current live class is being coordinated directly by a course administrator. Leave your details below and you'll hear back personally — plus get a free copy of the SAP Controls Career Guide right away.</p>
+      <form class="lead-form" id="lead-form">
+        <div class="form-error" id="lead-form-error"></div>
+        <div class="field">
+          <label for="lead-name">Full name</label>
+          <input type="text" id="lead-name" name="full_name" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="lead-email">Email address</label>
+          <input type="email" id="lead-email" name="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="lead-phone">Phone number</label>
+          <input type="tel" id="lead-phone" name="phone" required autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="lead-country">Country</label>
+          <input type="text" id="lead-country" name="country" required autocomplete="country-name" placeholder="e.g. United States">
+        </div>
+        <button type="submit" class="btn-submit" id="lead-submit-btn">Get My Free Career Guide</button>
+        <p class="form-note">No payment is collected here. A course administrator will follow up by email with current class dates and a secure enrollment link.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENROLL THANK YOU (lead-capture confirmation) ============ -->
+<section class="page" id="page-enroll-thankyou">
+  <div class="wrap">
+    <div class="thankyou-card">
+      <h2>You're on the list — check your inbox.</h2>
+      <p>Thanks, <span id="thankyou-name">there</span>. A course administrator will personally follow up at <strong id="thankyou-email"></strong> shortly.</p>
+      <div class="thankyou-gift">
+        <div class="gift-label">On its way to you</div>
+        Your free SAP Controls Career Guide — sent to the email address you provided.
+      </div>
+    </div>
+    <div class="next-steps">
+      <h3>What happens next</h3>
+      <ol>
+        <li>You'll receive your free SAP Controls Career Guide by email.</li>
+        <li>A course administrator will reply personally with a link showing which classes are currently open for registration.</li>
+        <li>That same message includes a link to enroll and pay once you've picked the class that works for you.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer>
+  SAP Controls Mastery — an SAP SOX/ITGC Training Program by TIB Systems LLC
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+// ============================================================================
+// ENROLLMENT MODE — temporary lead-capture for the first live class.
+// Switch to 'systeme' once Systeme.io checkout is activated (second class
+// onward): update SYSTEME_CHECKOUT_URL below with the real link, flip this
+// flag, and the Enroll page automatically swaps the form for a direct
+// "Enroll Now" button — no other changes needed.
+// ============================================================================
+const ENROLLMENT_MODE = 'lead-capture'; // 'lead-capture' | 'systeme'
+const SYSTEME_CHECKOUT_URL = 'https://tib-systems.systeme.io/sap-controls-mastery';
+
+const LEADS_SUPABASE_URL = 'https://blfgwysgekfqhcafofhe.supabase.co';
+const LEADS_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJsZmd3eXNnZWtmcWhjYWZvZmhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyODY0NDksImV4cCI6MjA5NTg2MjQ0OX0.HPdIMd-X30QBufoL9BVSVte6s_Fc-OOKIq9MbwLrzcI';
+const leadsClient = window.supabase.createClient(LEADS_SUPABASE_URL, LEADS_SUPABASE_ANON_KEY, {
+  auth: { persistSession: false }
+});
+
+function applyEnrollmentMode(){
+  var showSysteme = ENROLLMENT_MODE === 'systeme';
+  document.getElementById('enroll-systeme-price').style.display = showSysteme ? 'block' : 'none';
+  document.getElementById('enroll-systeme-note').style.display = showSysteme ? 'block' : 'none';
+  var btn = document.getElementById('enroll-systeme-btn');
+  btn.style.display = showSysteme ? 'inline-block' : 'none';
+  btn.href = SYSTEME_CHECKOUT_URL;
+  document.getElementById('enroll-leadform-wrap').style.display = showSysteme ? 'none' : 'block';
+}
+
+function setLeadFormError(msg){
+  var el = document.getElementById('lead-form-error');
+  if(!msg){ el.classList.remove('show'); el.textContent = ''; return; }
+  el.textContent = msg;
+  el.classList.add('show');
+}
+
+async function handleLeadFormSubmit(e){
+  e.preventDefault();
+  setLeadFormError(null);
+  var name = document.getElementById('lead-name').value.trim();
+  var email = document.getElementById('lead-email').value.trim();
+  var phone = document.getElementById('lead-phone').value.trim();
+  var country = document.getElementById('lead-country').value.trim();
+
+  if(!name || !email || !phone || !country){
+    setLeadFormError('Please fill in every field so the administrator can follow up with you.');
+    return;
+  }
+
+  var btn = document.getElementById('lead-submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try{
+    var { error } = await leadsClient.from('brochure_leads').insert({
+      full_name: name, email: email, phone: phone, country: country, source: 'brochure'
+    });
+    if(error) throw error;
+
+    document.getElementById('thankyou-name').textContent = name.split(' ')[0] || 'there';
+    document.getElementById('thankyou-email').textContent = email;
+    goTo('enroll-thankyou');
+    document.getElementById('lead-form').reset();
+  }catch(err){
+    setLeadFormError('Something went wrong sending your details. Please try again in a moment.');
+    console.error('Lead form submit failed:', err);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = 'Get My Free Career Guide';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  applyEnrollmentMode();
+  var form = document.getElementById('lead-form');
+  if(form) form.addEventListener('submit', handleLeadFormSubmit);
+});
+</script>
+<script>
+const INCLUDED = [
+  ["SAP Controls Overview", "The foundational concepts — what SAP controls are and what they protect against — so every later topic makes sense."],
+  ["The 22-Book Case File (per course)", "Twenty-two real control failures per course, built into one continuous investigation — not disconnected scenarios."],
+  ["SAP Skills, Tcode, Fiori & GRC Reference", "A practical technical guide mapping every tool and transaction you'll use to what it's for and how it works."],
+  ["Planning Card & Workpaper Templates", "The exact templates you'll use to reason through population and risk before touching SAP, and to document your test conclusions afterward."],
+  ["Reviewer Model Answers", "Every book's reviewer-challenge model answer — revealed only after you've defended your own conclusion live, in session."],
+  ["Facilitator-Marked Workpapers", "Three real workpapers per course, marked and returned within a week by a facilitator — not an algorithm."],
+  ["Weekday or Weekend Live Track", "Choose Monday/Wednesday/Friday evenings or a Saturday + Sunday schedule — same live instructor, same content, either way."],
+  ["Career Guide for Non-IT Professionals", "A plain-language guide to what the job actually looks like, what skills you need, and what interviewers ask."],
+  ["Live S/4HANA Server Access", "Real system access for the full course, plus two extra months afterward to keep practicing and prepping for interviews."],
+  ["Live Instructor SAP System Demo", "A live, guided walkthrough of the real system before you're asked to operate it yourself."],
+  ["Professional Resume & Job-Search Support", "Resume development and job-search assistance, built specifically around this credential."],
+  ["A Certificate of Completion", "Issued to every trainee who finishes — a specific, verifiable credential for your resume."],
+  ["Trainee Guide", "A complete walkthrough of how to use every tool in the course, plus study tips and an FAQ."],
+];
+
+const JOURNEY = [
+  ["Wk 1, Sat", "Opening Session", "Orientation, what a control is, the SAP landscape, and the reasoning method you'll use all course — live, with the whole cohort.", "~3 hrs live"],
+  ["Live Wks", "Theory — Module 1", "Reason through Access, Identity & Authorization on paper first — population, risk, and evidence plan — before you touch SAP.", "Live, weekly"],
+  ["Live Wks", "Theory — Module 2", "Change, Operations & the Data Estate — the same reasoning discipline, argued live with people who disagree.", "Live, weekly"],
+  ["Live Wks", "Theory — Module 3", "Record to Report, GRC Platform & Governance — the heaviest reading, worked through live before execution.", "Live, weekly"],
+  ["Live Wks", "SAP Lab — Module 1, 2 & 3", "First hour: your facilitator demonstrates the tests live. Second hour: you run them yourself, on your own login.", "Live, weekly"],
+  ["Live Wks", "Continued Live Sessions", "The case extends into the remaining scope areas covered by your post-class Training Manuals.", "Live, weekly"],
+  ["Wk 8, Sat", "Closing Session", "Assessment review, what you can now do that you couldn't eight weeks ago, and what's next.", "~3 hrs live"],
+];
+
+const FAQ = [
+  ["Do I need an IT or programming background?", "No. This is a business-process and risk-analysis skill, not a coding skill. If you have an accounting, audit, finance, or general business background, you already have the foundation this course builds on."],
+  ["How long does the course take?", "Eight weeks, fully live — an opening Saturday, six weeks of scheduled sessions, and a closing Saturday. Choose Monday/Wednesday/Friday evenings or a Saturday + Sunday schedule."],
+  ["Will I get real hands-on SAP experience, or just reading?", "Both, deliberately in that order. You'll reason through the risk and population first, then watch a live instructor demo the real system, then run the same tests yourself on your own login — not just read about it."],
+  ["Is there an exam?", "No. There are readiness checklists in the pre-class guides, for you alone. Your assessed work is three workpapers, built the way a real engagement deliverable is built and marked by a facilitator the way one is reviewed."],
+  ["Is interview preparation actually included, or is that just marketing language?", "It's built into the method, not bolted on as a separate session: every one of the 22 Books ends with a live reviewer challenge — a pushback question you have to answer for yourself before you're shown the model answer. That's the same pressure a real interview or a real client puts on your reasoning."],
+  ["Can I complete this at my own pace?", "No — every session is live, on a set weekly schedule, with the rest of your cohort. That's deliberate: the reasoning gets argued out loud, in the room, not absorbed silently on your own schedule. You just choose which schedule fits you — weekday evenings or the weekend."],
+  ["What happens after I finish?", "You'll have three completed workpapers, a certificate of completion, and a resume and job-search plan built specifically for landing this role — everything you need to represent this experience confidently and specifically in a real job search."],
+];
+
+function renderIncluded(){
+  const table = document.getElementById('included-table');
+  let html = '<tr><th>What You Get</th><th>Why It Matters</th></tr>';
+  INCLUDED.forEach(([a,b]) => { html += `<tr><td><strong>${a}</strong></td><td>${b}</td></tr>`; });
+  table.innerHTML = html;
+}
+
+function renderJourney(){
+  const table = document.getElementById('journey-table');
+  let html = '<tr><th>When</th><th>Phase</th><th>What Happens</th><th>Format</th></tr>';
+  JOURNEY.forEach(([a,b,c,d]) => { html += `<tr><td>${a}</td><td><strong>${b}</strong></td><td>${c}</td><td>${d}</td></tr>`; });
+  table.innerHTML = html;
+}
+
+function renderFaq(){
+  const list = document.getElementById('faq-list');
+  let html = '';
+  FAQ.forEach(([q,a], i) => {
+    html += `<div class="faq-item">`;
+    html += `<div class="faq-q" id="faq-q-${i}" onclick="toggleFaq(${i})"><span>${q}</span><span class="chev">▶</span></div>`;
+    html += `<div class="faq-a" id="faq-a-${i}"><p>${a}</p></div>`;
+    html += `</div>`;
+  });
+  list.innerHTML = html;
+}
+function toggleFaq(i){
+  const q = document.getElementById('faq-q-'+i);
+  const a = document.getElementById('faq-a-'+i);
+  const open = a.classList.contains('open');
+  a.classList.toggle('open', !open);
+  q.classList.toggle('open', !open);
+}
+
+const PAGES = ['home','why','different','casefiles','included','journey','capabilities','jobmarket','outcomes','faq','enroll','enroll-thankyou'];
+function goTo(page){
+  if(PAGES.indexOf(page) === -1) page = 'home';
+  PAGES.forEach(p => {
+    document.getElementById('page-'+p).classList.toggle('active', p === page);
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('data-page') === page);
+  });
+  window.scrollTo(0,0);
+  history.replaceState(null, '', '#'+page);
+  document.getElementById('nav-links').classList.remove('open');
+}
+function toggleMobileNav(){
+  document.getElementById('nav-links').classList.toggle('open');
+}
+
+renderIncluded();
+renderJourney();
+renderFaq();
+
+// Deep-link support: open directly to a page via URL hash
+const initialHash = (location.hash || '').replace('#','');
+if(initialHash && PAGES.indexOf(initialHash) !== -1){ goTo(initialHash); }
+window.addEventListener('hashchange', () => {
+  const h = (location.hash || '').replace('#','');
+  if(PAGES.indexOf(h) !== -1) goTo(h);
+});
+</script>
+</body>
+</html>
